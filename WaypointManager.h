@@ -31,7 +31,7 @@ public:
 	Waypoint* getWaypoint(const unsigned int index);
 	size_t getWaypointCount() { return m_waypoints.size(); }
 
-	Waypoint* getQuadpoint(const unsigned int index);
+	Waypoint* getQuadpoint(const unsigned int index); // quadpoint marks corners of buildings
 	size_t getQuadpointCount() { return m_quadpoints.size(); }
 
 

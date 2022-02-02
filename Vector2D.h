@@ -60,6 +60,10 @@ struct Vector2D
     //adjusts x and y so that the length of the vector does not exceed max
     inline void      Truncate(double max);
 
+    // addition
+    
+    inline double   Addition(const Vector2D& v2)const;
+
     //returns the distance between this vector and the one passed as a parameter
     inline double    Distance(const Vector2D& v2)const;
 
@@ -190,6 +194,14 @@ inline int Vector2D::Sign(const Vector2D& v2)const
     {
         return anticlockwise;
     }
+}
+
+// Addition -> who knows if this is right or not
+inline double Vector2D::Addition(const Vector2D& v2)const
+{
+    double v3 = v2.x + v2.y;
+
+    return v3;
 }
 
 //------------------------------ Perp ------------------------------------

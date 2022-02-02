@@ -18,6 +18,8 @@ HRESULT	Vehicle::initMesh(ID3D11Device* pd3dDevice, carColour colour)
 	HRESULT hr = DrawableGameObject::initMesh(pd3dDevice);
 
 	m_maxSpeed = NORMAL_MAX_SPEED;
+	setMaxSpeed(m_maxSpeed);
+
 	m_currentSpeed = m_maxSpeed;
 	setVehiclePosition(Vector2D(0, 0));
 
