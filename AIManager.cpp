@@ -166,7 +166,7 @@ void AIManager::keyDown(WPARAM param)
         }
         case key_space:
         {
-            Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(20, 0));
+            Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(20, 0)); // test
             m_pCar->setPositionTo(wp->getPosition());
             OutputDebugStringA("space pressed \n");
             break;
