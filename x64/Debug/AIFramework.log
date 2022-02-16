@@ -1,11 +1,3 @@
 ﻿  AIManager.cpp
-  CollisionHelper.cpp
-  DrawableGameObject.cpp
-C:\Users\p013206k.STUDENT\Downloads\AIFramework 2022\AIFramework 2022\DrawableGameObject.cpp(172,39): warning C4100: 'deltaTime': unreferenced formal parameter
-  PickupItem.cpp
-  Vehicle.cpp
-  Waypoint.cpp
-  WaypointManager.cpp
-  main.cpp
-  Generating Code...
-  AIFramework.vcxproj -> C:\Users\p013206k.STUDENT\Downloads\AIFramework 2022\AIFramework 2022\x64\Debug\AIFramework.exe
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(46,13): warning C4189: 'ar': local variable is initialized but not referenced
+  AIFramework.vcxproj -> C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\x64\Debug\AIFramework.exe

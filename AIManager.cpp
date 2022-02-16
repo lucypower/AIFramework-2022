@@ -6,6 +6,8 @@
 #include "main.h"
 #include "constants.h"
 
+#include <ctime>
+
 AIManager::AIManager()
 {
 	m_pCar = nullptr;
@@ -37,10 +39,18 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     float yPos = 300;
 
     m_pCar = new Vehicle();
-    HRESULT hr = m_pCar->initMesh(pd3dDevice, carColour::blueCar);
+    HRESULT hr = m_pCar->initMesh(pd3dDevice, carColour::redCar);
     m_pCar->setVehiclePosition(Vector2D(xPos, yPos));
+
+    m_AICar = new Vehicle();
+    HRESULT ar = m_AICar->initMesh(pd3dDevice, carColour::blueCar);
+    m_AICar->setVehiclePosition(Vector2D(500, -300));
+
     if (FAILED(hr))
         return hr;
+
+   // if (FAILED(ar))
+      //  return ar;
 
     // setup the waypoints
     m_waypointManager.createWaypoints(pd3dDevice);
@@ -57,6 +67,7 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     setRandomPickupPosition(pPickupPassenger);
 
     return hr;
+    //return ar;
 }
 
 
@@ -99,6 +110,12 @@ void AIManager::update(const float fDeltaTime)
 		checkForCollisions();
 		AddItemToDrawList(m_pCar);
 	}
+
+    if (m_AICar != nullptr)
+    {
+        m_AICar->update(fDeltaTime);
+        AddItemToDrawList(m_AICar);
+    }
 }
 
 void AIManager::mouseUp(int x, int y)
@@ -150,20 +167,32 @@ void AIManager::keyDown(WPARAM param)
             OutputDebugStringA("2 pressed \n");
             break;
         }
-        case key_a:
+        case key_a: // arrive for assignment
         {
             OutputDebugStringA("a Down \n");
             break;
         }
-		case key_s:
-		{
+		case key_s: // seek for assignment
+		{   
+            int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
+            int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);
+
+            Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(x, y)); // nearest waypoint of random coordinate? or random waypoint from index
+            m_AICar->setPositionTo(wp->getPosition());
+            OutputDebugStringA("S pressed \n");
 			break;
 		}
-        case key_t:
+        case key_t: // random waypoint for red car
 		{
+            int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
+            int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);
+
+            Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(x, y)); // nearest waypoint of random coordinate? or random waypoint from index
+            m_pCar->setPositionTo(wp->getPosition());
+            OutputDebugStringA("T pressed \n");
             break;
         }
-        case key_space:
+        case key_space: // centre waypoint
         {
             Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(20, 0));
             m_pCar->setPositionTo(wp->getPosition());

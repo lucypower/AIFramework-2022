@@ -1,1 +1,2 @@
 C:\Users\p013206k.STUDENT\Downloads\AIFramework 2022\AIFramework 2022\x64\Debug\AIFramework.exe
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\x64\Debug\AIFramework.exe

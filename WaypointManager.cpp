@@ -107,7 +107,6 @@ void WaypointManager::destroyWaypoints()
 	
 }
 
-
 Waypoint* WaypointManager::getWaypoint(const unsigned int index)
 {
 	if (index >= m_waypoints.size())
