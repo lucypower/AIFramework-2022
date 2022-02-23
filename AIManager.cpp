@@ -163,21 +163,30 @@ void AIManager::keyDown(WPARAM param)
             OutputDebugStringA("0 pressed \n");
             break;
         }
+
         case VK_NUMPAD1:
         {
             OutputDebugStringA("1 pressed \n");
             break;
         }
+
         case VK_NUMPAD2:
         {
             OutputDebugStringA("2 pressed \n");
             break;
         }
-        case key_a: // arrive for assignment
+
+        case key_a: // blue car random waypoint
         {
+            int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
+            int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);
+
+            Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(x, y));
+            m_AICar->setPositionTo(wp->getPosition());
             OutputDebugStringA("a Down \n");
             break;
         }
+
 		case key_s: // seek for assignment
 		{   
             Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(m_AICar->getPosition()));
@@ -185,6 +194,7 @@ void AIManager::keyDown(WPARAM param)
             OutputDebugStringA("S pressed \n");
             break;
 		}
+
         case key_t: // random waypoint for red car
 		{
             int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
@@ -195,6 +205,7 @@ void AIManager::keyDown(WPARAM param)
             OutputDebugStringA("T pressed \n");
             break;
         }
+
         case key_space: // centre waypoint
         {
             Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(20, 0));
@@ -202,6 +213,7 @@ void AIManager::keyDown(WPARAM param)
             OutputDebugStringA("space pressed \n");
             break;
         }
+
         // etc
         default:
             break;
