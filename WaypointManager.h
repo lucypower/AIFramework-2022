@@ -5,8 +5,10 @@ struct ID3D11Device;
 
 #include <d3d11_1.h> // this has the appropriate directx structures / objects
 #include <DirectXCollision.h> // this is the dx collision class helper
-using namespace DirectX; // this means you don't need to put DirectX:: in front of objects like XMVECTOR and so on. 
+#include <queue>
+#include <unordered_map>
 
+using namespace DirectX; // this means you don't need to put DirectX:: in front of objects like XMVECTOR and so on. 
 
 #include <vector>
 using namespace std;
@@ -18,6 +20,11 @@ class Waypoint;
 
 typedef vector<Waypoint*> vecWaypoints;
 typedef vector <BoundingBox> vecBoundingBox;
+
+struct Node
+{
+	int data;
+};
 
 class WaypointManager
 {
@@ -41,6 +48,7 @@ public:
 	vecWaypoints getNeighbouringWaypoints(Waypoint* waypoint);
 	Waypoint* getNearestWaypoint(Vector2D position);
 
+
 protected: // methods
 	bool	doWaypointsCrossBuilding(Waypoint* wp1, Waypoint* wp2);
 
@@ -51,5 +59,7 @@ protected: // properties
 	int				m_numCheckpoints;
 	vecBoundingBox	m_boundingBoxes;
 
+	queue<Node> frontier;
+	unordered_map<Node, Node> came_from;
 };
 
