@@ -58,8 +58,5 @@ protected: // properties
 	vecWaypoints	m_quadpoints;
 	int				m_numCheckpoints;
 	vecBoundingBox	m_boundingBoxes;
-
-	queue<Node> frontier;
-	unordered_map<Node, Node> came_from;
 };
 

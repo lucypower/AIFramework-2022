@@ -1,3 +1,18 @@
 ﻿  AIManager.cpp
-C:\Users\lcypw\OneDrive\Documents\University\Year 2\Artificial Intelligence in Games\AIFramework-2022\AIManager.cpp(52,13): warning C4189: 'ar': local variable is initialized but not referenced
-  AIFramework.vcxproj -> C:\Users\lcypw\OneDrive\Documents\University\Year 2\Artificial Intelligence in Games\AIFramework-2022\x64\Debug\AIFramework.exe
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(52,13): warning C4189: 'ar': local variable is initialized but not referenced
+  Background.cpp
+  Collidable.cpp
+  CollisionHelper.cpp
+  DDSTextureLoader.cpp
+  DrawableGameObject.cpp
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\DrawableGameObject.cpp(172,39): warning C4100: 'deltaTime': unreferenced formal parameter
+  main.cpp
+  PathfindingGraph.cpp
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.h(5,1): warning C4099: 'Waypoint': type name first seen using 'class' now seen using 'struct'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.h(4): message : see declaration of 'Waypoint'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(21,1): error C2059: syntax error: '}'
+  PickupItem.cpp
+  Vehicle.cpp
+  Waypoint.cpp
+  WaypointManager.cpp
+  Generating Code...
