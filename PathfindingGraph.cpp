@@ -10,25 +10,31 @@ PathfindingGraph::~PathfindingGraph()
 
 }
 
-bool PathfindingGraph::Search()
+void PathfindingGraph::AddEdge(int list, int a)
 {
-	Waypoint* start = new Waypoint();
+	adj[list].push_back(a);
+}
 
-	while (frontier != empty)
+void PathfindingGraph::Search(Waypoint* current)
+{
+	for (int i = 0; i < vertices; i++)
+		visited[i] = false;
+
+	while (!frontier.empty())
 	{
-		Waypoint* current = frontier front;
+		current = frontier.front();
 		frontier.pop();
 		
-		Waypoint* wp = m_waypointManager->getNeighbouringWaypoints(current);
+		vecWaypoints wp = m_waypointManager.getNeighbouringWaypoints(current);
 
-		if (current == goal)
+		for (Waypoint* neighbours : wp)
 		{
-			break;
-		}
-
-		for (Waypoint neighbours in wp)
-		{
-
+			if (!neighbours)
+			{
+				frontier.push(neighbours);
+				came_from <neighbours, current>;
+			}
 		}
 	}
+
 }

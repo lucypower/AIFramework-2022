@@ -1,18 +1,16 @@
-﻿  AIManager.cpp
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(52,13): warning C4189: 'ar': local variable is initialized but not referenced
-  Background.cpp
-  Collidable.cpp
-  CollisionHelper.cpp
-  DDSTextureLoader.cpp
-  DrawableGameObject.cpp
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\DrawableGameObject.cpp(172,39): warning C4100: 'deltaTime': unreferenced formal parameter
-  main.cpp
-  PathfindingGraph.cpp
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.h(5,1): warning C4099: 'Waypoint': type name first seen using 'class' now seen using 'struct'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.h(4): message : see declaration of 'Waypoint'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(21,1): error C2059: syntax error: '}'
+﻿  PathfindingGraph.cpp
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(15,34): error C2027: use of undefined type 'Waypoint'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\WaypointManager.h(16): message : see declaration of 'Waypoint'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(16,36): error C2027: use of undefined type 'Waypoint'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\WaypointManager.h(16): message : see declaration of 'Waypoint'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(23,35): error C2819: type 'WaypointManager' does not have an overloaded member 'operator ->'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\WaypointManager.h(29): message : see declaration of 'WaypointManager'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(23,35): message : did you intend to use '.' instead?
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(23,61): error C2232: '->WaypointManager::getNeighbouringWaypoints': left operand has 'class' type, use '.'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(25,18): error C2065: 'goal': undeclared identifier
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(30,17): error C2079: 'neighbours' uses undefined class 'Waypoint'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(30,28): error C2146: syntax error: missing ';' before identifier 'in'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(30,33): error C2143: syntax error: missing ';' before ')'
   PickupItem.cpp
-  Vehicle.cpp
-  Waypoint.cpp
   WaypointManager.cpp
   Generating Code...
