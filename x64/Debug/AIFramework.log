@@ -1,16 +1,5 @@
-﻿  PathfindingGraph.cpp
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(15,34): error C2027: use of undefined type 'Waypoint'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\WaypointManager.h(16): message : see declaration of 'Waypoint'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(16,36): error C2027: use of undefined type 'Waypoint'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\WaypointManager.h(16): message : see declaration of 'Waypoint'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(23,35): error C2819: type 'WaypointManager' does not have an overloaded member 'operator ->'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\WaypointManager.h(29): message : see declaration of 'WaypointManager'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(23,35): message : did you intend to use '.' instead?
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(23,61): error C2232: '->WaypointManager::getNeighbouringWaypoints': left operand has 'class' type, use '.'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(25,18): error C2065: 'goal': undeclared identifier
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(30,17): error C2079: 'neighbours' uses undefined class 'Waypoint'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(30,28): error C2146: syntax error: missing ';' before identifier 'in'
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\PathfindingGraph.cpp(30,33): error C2143: syntax error: missing ';' before ')'
-  PickupItem.cpp
-  WaypointManager.cpp
-  Generating Code...
+﻿  AIManager.cpp
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(52,13): warning C4189: 'ar': local variable is initialized but not referenced
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(106,27): warning C4456: declaration of 'wp' hides previous local declaration
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(102,15): message : see declaration of 'wp'
+  AIFramework.vcxproj -> C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\x64\Debug\AIFramework.exe

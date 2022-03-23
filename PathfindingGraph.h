@@ -2,6 +2,8 @@
 #include "WaypointManager.h"
 #include "Waypoint.h"
 
+using namespace std;
+
 class PathfindingGraph
 {
 public:
@@ -9,7 +11,7 @@ public:
 	PathfindingGraph();
 	~PathfindingGraph();
 
-	void Search(Waypoint* a);
+	unordered_map<Waypoint*, Waypoint*> Search(Waypoint* current, Waypoint* target);
 	void AddEdge(int list, int a);
 
 private:

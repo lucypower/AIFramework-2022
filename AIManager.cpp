@@ -81,14 +81,14 @@ void AIManager::update(const float fDeltaTime)
 {
     for (unsigned int i = 0; i < m_waypointManager.getWaypointCount(); i++) {
         m_waypointManager.getWaypoint(i)->update(fDeltaTime);
-       // AddItemToDrawList(m_waypointManager.getWaypoint(i)); // if you uncomment this, it will display the waypoints
+        //AddItemToDrawList(m_waypointManager.getWaypoint(i)); // if you uncomment this, it will display the waypoints
     }
 
     for (int i = 0; i < m_waypointManager.getQuadpointCount(); i++)
     {
         Waypoint* qp = m_waypointManager.getQuadpoint(i);
         qp->update(fDeltaTime);
-        //AddItemToDrawList(qp); // if you uncomment this, it will display the quad waypoints
+        AddItemToDrawList(qp); // if you uncomment this, it will display the quad waypoints
     }
 
     // update and display the pickups
@@ -97,9 +97,9 @@ void AIManager::update(const float fDeltaTime)
         AddItemToDrawList(m_pickups[i]);
     }
 
-	// draw the waypoints nearest to the car
+	 //draw the waypoints nearest to the car
 	
-    /*Waypoint* wp = m_waypointManager.getNearestWaypoint(m_pCar->getPosition());
+    Waypoint* wp = m_waypointManager.getNearestWaypoint(m_pCar->getPosition());
 	if (wp != nullptr)
 	{
 		vecWaypoints vwps = m_waypointManager.getNeighbouringWaypoints(wp);
@@ -107,7 +107,7 @@ void AIManager::update(const float fDeltaTime)
 		{
 			AddItemToDrawList(wp); // sets which items to draw
 		}
-	}*/
+	}
 
     // update and draw the car (and check for pickup collisions)
 	if (m_pCar != nullptr)
