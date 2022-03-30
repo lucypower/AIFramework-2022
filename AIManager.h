@@ -1,6 +1,7 @@
 #pragma once
 
 #include "WaypointManager.h"
+#include "SteeringBehaviours.h"
 
 using namespace std;
 

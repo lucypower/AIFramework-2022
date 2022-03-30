@@ -370,6 +370,7 @@
     </ClCompile>
     <ClCompile Include="PathfindingGraph.cpp" />
     <ClCompile Include="PickupItem.cpp" />
+    <ClCompile Include="SteeringBehaviours.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="Waypoint.cpp" />
     <ClCompile Include="WaypointManager.cpp" />
@@ -388,6 +389,7 @@
     <ClInclude Include="PathfindingGraph.h" />
     <ClInclude Include="PickupItem.h" />
     <CLInclude Include="resource.h" />
+    <ClInclude Include="SteeringBehaviours.h" />
     <ClInclude Include="structures.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vehicle.h" />

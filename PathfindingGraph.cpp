@@ -25,26 +25,26 @@ unordered_map<Waypoint*, Waypoint*> PathfindingGraph::Search(Waypoint* current, 
 	Waypoint* start = current;
 	frontier.push(start);
 
-	while (!frontier.empty())
-	{
-		current = frontier.front();
-		frontier.pop();
-		
-		if (current == target)
-			break;
+	//while (!frontier.empty())
+	//{
+	//	current = frontier.front();
+	//	frontier.pop();
+	//	
+	//	if (current == target)
+	//		break;
 
-		vecWaypoints wp = m_waypointManager.getNeighbouringWaypoints(current);
-		//Waypoint* wp = m_waypointManager.getNearestWaypoint(current);
+	//	vecWaypoints wp = m_waypointManager.getNeighbouringWaypoints(current);
+	//	//Waypoint* wp = m_waypointManager.getNearestWaypoint(current);
 
-		for_each (came_from.begin(), came_from.end(), make_pair(wp, start));
-		{
-			if (came_from.find(wp) != came_from.end())
-			{
-				frontier.push(wp);
-				came_from <wp, current>;
-			}
-		}
-	}
+	//	for_each (came_from.begin(), came_from.end(), make_pair(wp, start));
+	//	{
+	//		if (came_from.find(wp) != came_from.end())
+	//		{
+	//			frontier.push(wp);
+	//			came_from <wp, current>;
+	//		}
+	//	}
+	//}
 
 	//TODO: change queue to priority queue and set up containers which will then order in terms of cost and then should work or something like that idk xD
 

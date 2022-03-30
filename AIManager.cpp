@@ -8,8 +8,6 @@
 
 #include <ctime>
 
-
-
 AIManager::AIManager()
 {
 	m_pCar = nullptr;
@@ -88,7 +86,7 @@ void AIManager::update(const float fDeltaTime)
     {
         Waypoint* qp = m_waypointManager.getQuadpoint(i);
         qp->update(fDeltaTime);
-        AddItemToDrawList(qp); // if you uncomment this, it will display the quad waypoints
+        //AddItemToDrawList(qp); // if you uncomment this, it will display the quad waypoints
     }
 
     // update and display the pickups
@@ -155,6 +153,7 @@ void AIManager::keyDown(WPARAM param)
 	const WPARAM key_s = 83;
     const WPARAM key_t = 84;
     const WPARAM key_space = 32;
+    const WPARAM key_w = 87;
 
     switch (param)
     {
@@ -176,7 +175,7 @@ void AIManager::keyDown(WPARAM param)
             break;
         }
 
-        case key_a: // blue car random waypoint
+        case key_w: // blue car random waypoint // turn into wandering blue car
         {
             int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
             int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);

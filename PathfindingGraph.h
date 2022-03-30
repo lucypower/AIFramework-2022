@@ -18,7 +18,7 @@ private:
 
 	WaypointManager m_waypointManager;
 
-	queue<Waypoint*> frontier;
+	priority_queue<Waypoint*, std::vector<Waypoint*>, std::greater<Waypoint*>> frontier; // std::greater might be float for cost of path ?
 	unordered_map<Waypoint*, Waypoint*> came_from;
 
 	int vertices;
