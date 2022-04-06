@@ -1,5 +1,8 @@
 ﻿  AIManager.cpp
 C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(50,13): warning C4189: 'ar': local variable is initialized but not referenced
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(104,27): warning C4456: declaration of 'wp' hides previous local declaration
-C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(100,15): message : see declaration of 'wp'
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(105,27): warning C4456: declaration of 'wp' hides previous local declaration
+C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\AIManager.cpp(101,15): message : see declaration of 'wp'
+  Vehicle.cpp
+  main.cpp
+  Generating Code...
   AIFramework.vcxproj -> C:\Users\p013206k.STUDENT\Documents\GitHub\AIFramework-2022\x64\Debug\AIFramework.exe

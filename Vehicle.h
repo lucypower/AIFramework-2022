@@ -12,6 +12,16 @@ enum class carColour
 	blueCar,
 };
 
+enum CarStates
+{
+	SEEK,
+	ARRIVE,
+	WANDER,
+	PURSUIT,
+	FLEE,
+	OBSTACLEAVOIDANCE
+};
+
 class Vehicle : public DrawableGameObject, public Collidable
 {
 public:
@@ -25,7 +35,8 @@ public:
 	void setWaypointManager(WaypointManager* wpm);
 	void hasCollided() {}
 
-
+	void Seek(Vector2D position);
+	void Wander();
 
 protected: // protected methods
 
@@ -40,5 +51,6 @@ protected: // preotected properties
 	Vector2D m_lastPosition;
 	WaypointManager* m_waypointManager;
 
+	CarStates state;
 };
 

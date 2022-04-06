@@ -1,6 +1,10 @@
 #include "Vehicle.h"
+#include "Waypoint.h"
 
 #define NORMAL_MAX_SPEED 200
+
+
+
 
 HRESULT	Vehicle::initMesh(ID3D11Device* pd3dDevice, carColour colour)
 {
@@ -35,6 +39,31 @@ void Vehicle::update(const float deltaTime)
 	float velocity = deltaTime * m_currentSpeed;
 
 	float length = (float)vecTo.Length();
+
+	switch (state)
+	{
+	case SEEK:
+		Seek(m_positionTo);
+		break;
+	case ARRIVE:
+		// similar thing for other steering behaviours
+		break;
+	case WANDER:
+		Wander();
+		break;
+	case PURSUIT:
+
+		break;
+	case FLEE:
+
+		break;
+	case OBSTACLEAVOIDANCE:
+
+		break;
+	default:
+		break;
+	}
+	
 	// if the distance to the end point is less than the car would move, then only move that distance. 
 	if (length > 0) {
 		vecTo.Normalize();
@@ -45,6 +74,7 @@ void Vehicle::update(const float deltaTime)
 
 		m_currentPosition += vecTo;
 	}
+
 
 	// rotate the object based on its last & current position
 	Vector2D diff = m_currentPosition - m_lastPosition;
@@ -91,4 +121,24 @@ void Vehicle::setWaypointManager(WaypointManager* wpm)
 	m_waypointManager = wpm;
 }
 
+void Vehicle::Seek(Vector2D position)
+{
+	state = CarStates::SEEK;
+	Waypoint* wp = m_waypointManager->getNearestWaypoint(position);
+	m_positionTo = wp->getPosition();
+}
 
+void Vehicle::Wander()
+{
+	state = CarStates::WANDER;
+	Vector2D vecTo = m_positionTo - m_currentPosition;
+	float length = (float)vecTo.Length();
+
+	if (length < 5)
+	{
+		Waypoint* wp = m_waypointManager->getRandomWaypoint();
+		m_positionTo = wp->getPosition();
+		vecTo = m_positionTo - m_currentPosition;
+		length = (float)vecTo.Length();
+	}	
+}

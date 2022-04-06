@@ -59,6 +59,7 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     // setup the waypoints
     m_waypointManager.createWaypoints(pd3dDevice);
     m_pCar->setWaypointManager(&m_waypointManager);
+    m_AICar->setWaypointManager(&m_waypointManager);
 
     // create a passenger pickup item
     PickupItem* pPickupPassenger = new PickupItem();
@@ -177,19 +178,16 @@ void AIManager::keyDown(WPARAM param)
 
         case key_w: // blue car random waypoint // turn into wandering blue car
         {
-            int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
-            int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);
+            m_AICar->Wander();
 
-            Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(x, y));
-            m_AICar->setPositionTo(wp->getPosition());
-            OutputDebugStringA("a Down \n");
+            OutputDebugStringA("W Pressed \n");
             break;
         }
 
 		case key_s: // seek for assignment
 		{   
-            Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(m_AICar->getPosition()));
-            m_pCar->setPosition(wp->getPosition());
+            m_pCar->Seek(m_AICar->getPosition());
+
             OutputDebugStringA("S pressed \n");
             break;
 		}

@@ -163,6 +163,11 @@ vecWaypoints WaypointManager::getNeighbouringWaypoints(Waypoint* waypoint)
 	return nearest;
 }
 
+Waypoint* WaypointManager::getRandomWaypoint()
+{
+	return m_waypoints[rand() % m_waypoints.size()];
+}
+
 bool WaypointManager::doWaypointsCrossBuilding(Waypoint* wp1, Waypoint* wp2)
 {
 	if (wp1 == wp2)
