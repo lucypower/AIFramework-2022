@@ -55,7 +55,7 @@ void Vehicle::update(const float deltaTime)
 
 		break;
 	case FLEE:
-
+		Flee(m_positionTo);
 		break;
 	case OBSTACLEAVOIDANCE:
 
@@ -121,16 +121,44 @@ void Vehicle::setWaypointManager(WaypointManager* wpm)
 	m_waypointManager = wpm;
 }
 
+void Vehicle::Velocity(const float deltaTime)
+{
+	m_velocity.x = deltaTime * m_currentSpeed;
+	m_velocity.y = deltaTime * m_currentSpeed;
+}
+
 void Vehicle::Seek(Vector2D position)
 {
 	state = CarStates::SEEK;
+
 	Waypoint* wp = m_waypointManager->getNearestWaypoint(position);
 	m_positionTo = wp->getPosition();
+}
+
+void Vehicle::Arrive(Vector2D position) // TODO : Not working
+{
+	state = CarStates::ARRIVE;
+
+	Vector2D vecTo = m_positionTo - m_currentPosition;
+	float length = (float)vecTo.Length();
+
+	if (length > 0)
+	{
+		double speed = length / (double) 3;
+
+		Vector2D desiredVelocity = vecTo * speed / length;
+		/*Vector2D force = desiredVelocity - speed;*/
+
+		Waypoint* wp = m_waypointManager->getNearestWaypoint(position);
+		//m_positionTo = wp->getPosition() * force;
+	}
+
 }
 
 void Vehicle::Wander()
 {
 	state = CarStates::WANDER;
+
 	Vector2D vecTo = m_positionTo - m_currentPosition;
 	float length = (float)vecTo.Length();
 
@@ -141,4 +169,23 @@ void Vehicle::Wander()
 		vecTo = m_positionTo - m_currentPosition;
 		length = (float)vecTo.Length();
 	}	
+}
+
+void Vehicle::Flee(Vector2D targetPosition) // TODO : Not working // drawable game object? // find direction of red car, find inverse for blue car and length to go to mag 1 and then subtract length
+{
+	state = CarStates::FLEE;
+
+	Vector2D vecTo = targetPosition - m_currentPosition;
+	float length = (float)vecTo.Length();
+
+	if (length < 2)
+	{
+		Waypoint* wp = m_waypointManager->getNearestWaypoint(targetPosition);
+		m_positionTo = wp->getPosition() - m_positionTo;
+		Vector2D vecTo = targetPosition - m_currentPosition;
+		float length = (float)vecTo.Length();
+	}
+
+	//Vector2D desiredVelocity = Vec2DNormalize(m_currentPosition - m_positionTo * m_maxSpeed);
+	//Vector2D force = desiredVelocity - velocity;
 }

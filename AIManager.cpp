@@ -10,8 +10,8 @@
 
 AIManager::AIManager()
 {
-	m_pCar = nullptr;
-    m_AICar = nullptr;
+	m_redCar = nullptr;
+    m_blueCar = nullptr;
 }
 
 AIManager::~AIManager()
@@ -29,11 +29,11 @@ void AIManager::release()
 	}
 	m_pickups.clear();
 
-	delete m_pCar;
-	m_pCar = nullptr;
+	delete m_redCar;
+	m_redCar = nullptr;
 
-    delete m_AICar;
-    m_AICar = nullptr;
+    delete m_blueCar;
+    m_blueCar = nullptr;
 }
 
 HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
@@ -42,13 +42,13 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
     float xPos = -500; // an abtrirary start point
     float yPos = 300;
 
-    m_pCar = new Vehicle();
-    HRESULT hr = m_pCar->initMesh(pd3dDevice, carColour::redCar);
-    m_pCar->setVehiclePosition(Vector2D(xPos, yPos));
+    m_redCar = new Vehicle();
+    HRESULT hr = m_redCar->initMesh(pd3dDevice, carColour::redCar);
+    m_redCar->setVehiclePosition(Vector2D(xPos, yPos));
 
-    m_AICar = new Vehicle();
-    HRESULT ar = m_AICar->initMesh(pd3dDevice, carColour::blueCar);
-    m_AICar->setVehiclePosition(Vector2D(500, -300));
+    m_blueCar = new Vehicle();
+    HRESULT ar = m_blueCar->initMesh(pd3dDevice, carColour::blueCar);
+    m_blueCar->setVehiclePosition(Vector2D(500, -300));
 
     if (FAILED(hr))
         return hr;
@@ -58,8 +58,8 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
 
     // setup the waypoints
     m_waypointManager.createWaypoints(pd3dDevice);
-    m_pCar->setWaypointManager(&m_waypointManager);
-    m_AICar->setWaypointManager(&m_waypointManager);
+    m_redCar->setWaypointManager(&m_waypointManager);
+    m_blueCar->setWaypointManager(&m_waypointManager);
 
     // create a passenger pickup item
     PickupItem* pPickupPassenger = new PickupItem();
@@ -98,7 +98,7 @@ void AIManager::update(const float fDeltaTime)
 
 	 //draw the waypoints nearest to the car
 	
-    Waypoint* wp = m_waypointManager.getNearestWaypoint(m_pCar->getPosition());
+    Waypoint* wp = m_waypointManager.getNearestWaypoint(m_redCar->getPosition());
 	if (wp != nullptr)
 	{
 		vecWaypoints vwps = m_waypointManager.getNeighbouringWaypoints(wp);
@@ -109,17 +109,17 @@ void AIManager::update(const float fDeltaTime)
 	}
 
     // update and draw the car (and check for pickup collisions)
-	if (m_pCar != nullptr)
+	if (m_redCar != nullptr)
 	{
-		m_pCar->update(fDeltaTime);
+		m_redCar->update(fDeltaTime);
 		checkForCollisions();
-		AddItemToDrawList(m_pCar);
+		AddItemToDrawList(m_redCar);
 	}
 
-    if (m_AICar != nullptr)
+    if (m_blueCar != nullptr)
     {
-        m_AICar->update(fDeltaTime);
-        AddItemToDrawList(m_AICar);
+        m_blueCar->update(fDeltaTime);
+        AddItemToDrawList(m_blueCar);
     }
 }
 
@@ -131,7 +131,7 @@ void AIManager::mouseUp(int x, int y)
 		return;
 
     // steering mode
-    m_pCar->setPositionTo(wp->getPosition());
+    m_redCar->setPositionTo(wp->getPosition());
 }
 
 void AIManager::keyUp(WPARAM param)
@@ -152,9 +152,9 @@ void AIManager::keyDown(WPARAM param)
 	// hint 65-90 are a-z
 	const WPARAM key_a = 65;
 	const WPARAM key_s = 83;
-    const WPARAM key_t = 84;
     const WPARAM key_space = 32;
     const WPARAM key_w = 87;
+    const WPARAM key_f = 70;
 
     switch (param)
     {
@@ -176,37 +176,48 @@ void AIManager::keyDown(WPARAM param)
             break;
         }
 
-        case key_w: // blue car random waypoint // turn into wandering blue car
-        {
-            m_AICar->Wander();
-
-            OutputDebugStringA("W Pressed \n");
-            break;
-        }
-
-		case key_s: // seek for assignment
+		case key_s: // blue car seek for assignment
 		{   
-            m_pCar->Seek(m_AICar->getPosition());
+            int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
+            int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);
+
+            m_blueCar->Seek(Vector2D(x, y));
 
             OutputDebugStringA("S pressed \n");
             break;
 		}
 
-        case key_t: // random waypoint for red car
-		{
+        case key_a: // blue car arrive for assignment
+        {
             int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
             int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);
 
-            Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(x, y));
-            m_pCar->setPositionTo(wp->getPosition());
-            OutputDebugStringA("T pressed \n");
+            m_blueCar->Arrive(Vector2D(x, y));
+
+            OutputDebugStringA("A pressed \n");
+            break;
+        }
+
+        case key_w: // red car wander for assignment
+        {
+            m_redCar->Wander();
+
+            OutputDebugStringA("W Pressed \n");
+            break;
+        }
+
+        case key_f:
+        {
+            m_blueCar->Flee(m_redCar->getPosition());
+
+            OutputDebugStringA("F pressed \n");
             break;
         }
 
         case key_space: // centre waypoint
         {
             Waypoint* wp = m_waypointManager.getNearestWaypoint(Vector2D(20, 0));
-            m_pCar->setPositionTo(wp->getPosition());
+            m_redCar->setPositionTo(wp->getPosition());
             OutputDebugStringA("space pressed \n");
             break;
         }
@@ -261,7 +272,7 @@ bool AIManager::checkForCollisions()
         &carScale,
         &dummy,
         &carPos,
-        XMLoadFloat4x4(m_pCar->getTransform())
+        XMLoadFloat4x4(m_redCar->getTransform())
     );
 
     // create a bounding sphere for the car
@@ -298,7 +309,7 @@ bool AIManager::checkForCollisions()
         setRandomPickupPosition(m_pickups[0]);
 
         // you will need to test the type of the pickup to decide on the behaviour
-        // m_pCar->dosomething(); ...
+        // m_redCar->dosomething(); ...
 
         return true;
     }

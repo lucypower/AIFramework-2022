@@ -35,8 +35,12 @@ public:
 	void setWaypointManager(WaypointManager* wpm);
 	void hasCollided() {}
 
+	void Velocity(const float deltaTime);
+
 	void Seek(Vector2D position);
 	void Wander();
+	void Arrive(Vector2D position);
+	void Flee(Vector2D targetPosition);
 
 protected: // protected methods
 
@@ -49,6 +53,7 @@ protected: // preotected properties
 	Vector2D m_startPosition;
 	Vector2D m_positionTo;
 	Vector2D m_lastPosition;
+	Vector2D m_velocity;
 	WaypointManager* m_waypointManager;
 
 	CarStates state;
