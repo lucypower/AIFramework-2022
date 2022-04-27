@@ -40,7 +40,9 @@ public:
 	void Seek(Vector2D position);
 	void Wander();
 	void Arrive(Vector2D position);
-	void Flee(Vector2D targetPosition);
+	Vector2D Flee(Vector2D targetPosition);
+	void Pursuit();
+	void Evade();
 
 protected: // protected methods
 

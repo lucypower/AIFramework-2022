@@ -208,7 +208,7 @@ void AIManager::keyDown(WPARAM param)
 
         case key_f:
         {
-            m_blueCar->Flee(m_redCar->getPosition());
+            m_blueCar->Flee(m_redCar->update(deltaTime));
 
             OutputDebugStringA("F pressed \n");
             break;

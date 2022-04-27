@@ -171,7 +171,7 @@ void Vehicle::Wander()
 	}	
 }
 
-void Vehicle::Flee(Vector2D targetPosition) // TODO : Not working // drawable game object? // find direction of red car, find inverse for blue car and length to go to mag 1 and then subtract length
+Vector2D Vehicle::Flee(Vector2D targetPosition) // TODO : Not working // drawable game object? // find direction of red car, find inverse for blue car and length to go to mag 1 and then subtract length
 {
 	state = CarStates::FLEE;
 
@@ -186,6 +186,6 @@ void Vehicle::Flee(Vector2D targetPosition) // TODO : Not working // drawable ga
 		float length = (float)vecTo.Length();
 	}
 
-	//Vector2D desiredVelocity = Vec2DNormalize(m_currentPosition - m_positionTo * m_maxSpeed);
-	//Vector2D force = desiredVelocity - velocity;
+	Vector2D desiredVelocity = Vec2DNormalize(m_currentPosition - m_positionTo * m_maxSpeed);
+	return (desiredVelocity - m_velocity);
 }
