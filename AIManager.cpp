@@ -155,6 +155,7 @@ void AIManager::keyDown(WPARAM param)
     const WPARAM key_space = 32;
     const WPARAM key_w = 87;
     const WPARAM key_f = 70;
+    const WPARAM key_p = 80;
 
     switch (param)
     {
@@ -208,9 +209,20 @@ void AIManager::keyDown(WPARAM param)
 
         case key_f:
         {
-            m_blueCar->Flee(m_redCar->update(deltaTime));
+            int x = (rand() % SCREEN_WIDTH) - (SCREEN_WIDTH / 2);
+            int y = (rand() % SCREEN_HEIGHT) - (SCREEN_HEIGHT / 2);
+
+            m_blueCar->Flee(m_redCar->getPosition());
 
             OutputDebugStringA("F pressed \n");
+            break;
+        }
+
+        case key_p:
+        {
+            m_blueCar->Pursuit(m_redCar->getPosition());
+
+            OutputDebugStringA("P pressed \n");
             break;
         }
 

@@ -30,6 +30,7 @@ public:
 
 	void setMaxSpeed(const float maxSpeed) { m_maxSpeed = maxSpeed; }
 	void setCurrentSpeed(const float speed); // a ratio: a value between 0 and 1 (1 being max speed)
+	float getCurrentSpeed() { return m_currentSpeed; }
 	void setPositionTo(Vector2D positionTo); // a position to move to
 	void setVehiclePosition(Vector2D position); // the current position - this resets positionTo
 	void setWaypointManager(WaypointManager* wpm);
@@ -40,9 +41,8 @@ public:
 	void Seek(Vector2D position);
 	void Wander();
 	void Arrive(Vector2D position);
-	Vector2D Flee(Vector2D targetPosition);
-	void Pursuit();
-	void Evade();
+	void Flee(Vector2D position);
+	void Pursuit(Vector2D position);
 
 protected: // protected methods
 

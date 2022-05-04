@@ -46,13 +46,13 @@ void Vehicle::update(const float deltaTime)
 		Seek(m_positionTo);
 		break;
 	case ARRIVE:
-		// similar thing for other steering behaviours
+		Arrive(m_positionTo);
 		break;
 	case WANDER:
 		Wander();
 		break;
 	case PURSUIT:
-
+		Pursuit(m_positionTo);
 		break;
 	case FLEE:
 		Flee(m_positionTo);
@@ -121,11 +121,11 @@ void Vehicle::setWaypointManager(WaypointManager* wpm)
 	m_waypointManager = wpm;
 }
 
-void Vehicle::Velocity(const float deltaTime)
-{
-	m_velocity.x = deltaTime * m_currentSpeed;
-	m_velocity.y = deltaTime * m_currentSpeed;
-}
+//void Vehicle::Velocity(const float deltaTime)
+//{
+//	m_velocity.x = deltaTime * m_currentSpeed;
+//	m_velocity.y = deltaTime * m_currentSpeed;
+//}
 
 void Vehicle::Seek(Vector2D position)
 {
@@ -135,24 +135,24 @@ void Vehicle::Seek(Vector2D position)
 	m_positionTo = wp->getPosition();
 }
 
-void Vehicle::Arrive(Vector2D position) // TODO : Not working
+void Vehicle::Arrive(Vector2D position) // TODO : General concept present, code not actually applying a speed decrease currently
 {
 	state = CarStates::ARRIVE;
 
-	Vector2D vecTo = m_positionTo - m_currentPosition;
+	Vector2D vecTo = position - m_currentPosition;
 	float length = (float)vecTo.Length();
+
+	float speed = length * 0.3;
+	Vector2D desiredVelocity = position * speed / length;	
 
 	if (length > 0)
 	{
-		double speed = length / (double) 3;
-
-		Vector2D desiredVelocity = vecTo * speed / length;
-		/*Vector2D force = desiredVelocity - speed;*/
-
 		Waypoint* wp = m_waypointManager->getNearestWaypoint(position);
-		//m_positionTo = wp->getPosition() * force;
+		// apply speed/desiredVelocity/force here
+		m_positionTo = wp->getPosition();
+		vecTo = m_positionTo - m_currentPosition;
+		length = (float)vecTo.Length();
 	}
-
 }
 
 void Vehicle::Wander()
@@ -171,21 +171,42 @@ void Vehicle::Wander()
 	}	
 }
 
-Vector2D Vehicle::Flee(Vector2D targetPosition) // TODO : Not working // drawable game object? // find direction of red car, find inverse for blue car and length to go to mag 1 and then subtract length
+void Vehicle::Flee(Vector2D targetPosition) // TODO : Not working // drawable game object? // find direction of red car, find inverse for blue car and length to go to mag 1 and then subtract length
 {
 	state = CarStates::FLEE;
 
-	Vector2D vecTo = targetPosition - m_currentPosition;
+	Vector2D vecTo = m_currentPosition - targetPosition;
 	float length = (float)vecTo.Length();
 
 	if (length < 2)
 	{
-		Waypoint* wp = m_waypointManager->getNearestWaypoint(targetPosition);
-		m_positionTo = wp->getPosition() - m_positionTo;
-		Vector2D vecTo = targetPosition - m_currentPosition;
-		float length = (float)vecTo.Length();
+		Waypoint* wp = m_waypointManager->getRandomWaypoint();
+		m_positionTo = wp->getPosition();
+	}
+	else
+	{
+		m_positionTo = m_currentPosition;
 	}
 
-	Vector2D desiredVelocity = Vec2DNormalize(m_currentPosition - m_positionTo * m_maxSpeed);
-	return (desiredVelocity - m_velocity);
+	//Vector2D desiredVelocity = Vec2DNormalize(m_currentPosition - m_positionTo * m_maxSpeed);
+	//return (desiredVelocity - m_velocity);
+
+	//Waypoint* wp = m_waypointManager->getRandomWaypoint();
+	//m_positionTo = wp->getPosition();
+}
+
+void Vehicle::Pursuit(Vector2D targetPosition) // not working but concept is there, find position of red car and move towards position
+{
+	state = CarStates::PURSUIT;
+
+	Vector2D vecTo = m_positionTo - m_currentPosition;
+	float length = (float)vecTo.Length();
+
+	if (length < 10)
+	{
+		Waypoint* wp = m_waypointManager->getNearestWaypoint(targetPosition);
+		m_positionTo = wp->getPosition();
+		vecTo = m_positionTo - m_currentPosition;
+		length = (float)vecTo.Length();
+	}
 }
