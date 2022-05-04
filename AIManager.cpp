@@ -79,7 +79,7 @@ HRESULT AIManager::initialise(ID3D11Device* pd3dDevice)
 void AIManager::update(const float fDeltaTime)
 {
     for (unsigned int i = 0; i < m_waypointManager.getWaypointCount(); i++) {
-        m_waypointManager.getWaypoint(i)->update(fDeltaTime);
+        m_waypointManager.getWaypoint(i)->update(fDeltaTime);.
         //AddItemToDrawList(m_waypointManager.getWaypoint(i)); // if you uncomment this, it will display the waypoints
     }
 
